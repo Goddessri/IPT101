@@ -1,0 +1,75 @@
+Splash Screen
+New Activity -> main_Activity
+
+Drawable->vector asset
+
+Activity_spash_xml
+<RelativeLayout...
+
+<ImageView
+android:Layout_width="200dp"
+android:Layout_height="200dp"
+android:src="@drawable/ic_audiotrack_black_24dp"
+android: layout_centerInParent="true"
+android:id="@+id/iv_note"/>
+
+Value
+-styles.xml (paste the code below from app theme style)
+
+<style name="SplashScreenTheme" parent="Theme.AppCompat.light
+<style name = "colorPrimary">@color/colorPrimaryDark</item>
+<item name ="colorPrimaryDark">@color/colorPrimary</item>
+<item name ="colorAccent">@color/colorAccent</item>
+
+Manifest.xml
+insert below <application>
+
+<activity android:name=".SplashScreenActivity"
+android:theme="@style/SpashScreenTheme">
+<intent-filter>
+<action android:name="android.intent.action.MAIN"/>
+
+<category android:name="android.intent.category.LAUNCHER"/>
+</intent-filter>
+
+</activity>
+<activity android:name=".ManActivity">
+</activity>
+</application>
+</manifest>
+
+SplashScreen_Activity.kt
+
+iv_note.alpha = 0f
+iv_note.animate().setDuration(1500).alpha(value:1f).withEndAction{
+val i =Intent(this, MainActifvity::class.java)
+startActivity(i)
+overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+finish()
+}
+}
+}
+
+BUILD.GRADLE(:app)
+insert below:
+
+
+implementation"androidx.core-splashscreen:1.0.0"
+
+then, click synch now
+
+THEME ->MANIFEST
+insert:
+<style name="Theme.SnapchatSplashScreen" parent="Base.Theme.SnapchatSplashScreen"/>
+
+<style name = Theme.App.SplashScreen" parent="Theme.SplashScreen">
+<item name = "windowSplashScreenBackground">@color/violet</item>
+<item name = "windowSplashScreenAnimatedIcon">@drawable/snapchatlogo</item>
+<item name = "postSplashScreenTheme">@style/Base.Theme.SnapchatSplashScreen</item>
+</style>
+
+MAIN.ACTIVTY
+class MainActivity: AppCompActivity(){
+super.onCreate(savedInstanceState: Bundle)
+Thread.sleep(millis:3000)
+installSplashScreen()
